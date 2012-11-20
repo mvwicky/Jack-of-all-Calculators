@@ -928,6 +928,31 @@ def unit_conversions():
 		print "5. Quart"
 		print "6. Gallon"
 		q = input()
+		if q == 1:
+			print "Teaspoons to"
+			print "1. Tablespoons"
+			print "2. Ounces"
+			print "3. Pints"
+			print "4. Quarts"
+			print "6. Gallons"
+			
+			h = input()
+		if q == 2:
+			h = input()
+		if q == 3:
+			h = input()
+		if q == 4:
+			h = input()
+		if q == 5:
+			h = input()
+		if q == 6:
+			h = input()
+		if q == 7:
+			h = input()
+		if q == 8:
+			h = input()
+		if q == 9:
+			h = input()	
 	if i == 4: # Temperature
 		print "1. Farenheit"
 		print "2. Celsius"
