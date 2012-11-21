@@ -41,43 +41,38 @@ if wc == 1:
 	while c < len(len_units):
 		print (c + 1) , len_units[c]
 		c += 1
-	print "Starting Unit?"
 	wu = raw_input("->")
 	wu = int(wu)
-	u = 0
-	while u < len(len_units):
-		if wu == u:
-			u += 1
-		elif wu != u:
-			print u , len_units[u]
-			u += 1
-
-
+	np = 1
+	while wu < len(len_units): 
+		if wu == (len(len_units) - wu):
+			wu += 1
+		elif wu != (len(len_units) - wu):
+			print np , len_units[wu]
+			wu += 1
+			np += 1
 if wc == 2:
 	c = 0 
 	print categories[1]
 	while c < len(mass_units):
 		print (c + 1) , mass_units[c]
 		c += 1
-	print "Starting Unit?"
 if wc == 3: 
 	c = 0
 	print categories[2]
 	while c < len(vol_units):
 		print (c + 1) , vol_units[c]
 		c += 1
-	print "Starting Unit?"
 if wc == 4:
 	c = 0
 	print categories[3]
 	while c < len(tem_units):
 		print (c + 1) , tem_units[c]
 		c += 1
-	print "Starting Unit?"
 if wc == 5:
 	c = 0
 	print categories[4]
 	while c < len(currencies):
 		print (c + 1) , currencies[c]
 		c += 1
-	print "Starting Unit?"
+
