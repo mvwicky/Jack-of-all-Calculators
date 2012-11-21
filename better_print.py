@@ -47,9 +47,11 @@ if wc == 1:
 	u = 0
 	while u < len(len_units):
 		if wu == u:
-			print ""
-		print (u + 1) , len_units[u]
-		u += 1
+			u += 1
+		elif wu != u:
+			print u , len_units[u]
+			u += 1
+
 
 if wc == 2:
 	c = 0 
