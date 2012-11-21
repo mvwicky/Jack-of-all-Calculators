@@ -977,7 +977,8 @@ def do_things():
 		print "2. Rows"
 		print "3. Diagonals"
 		print "4. Formulas"
-		print "5. Matrix Editing"
+		print "5. Unit Conversions"
+		print "6. Matrix Editing"
 		c = input()
 		os.system('cls')
 		stay_c = 1
@@ -1251,7 +1252,9 @@ def do_things():
 				os.system('cls')
 		os.system('cls')
 		stay_e = 1
-		if c == 5: # Matrix Editing
+		if c == 5:
+			unit_conversions()
+		if c == 6: # Matrix Editing
 			while stay_e == 1:
 				print "1. Initialize Matrix to 0"
 				print "2. Assign one value to all spots"
