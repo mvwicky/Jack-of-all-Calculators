@@ -44,35 +44,80 @@ if wc == 1:
 	wu = raw_input("->")
 	wu = int(wu)
 	np = 1
-	while wu < len(len_units): 
-		if wu == (len(len_units) - wu):
-			wu += 1
-		elif wu != (len(len_units) - wu):
-			print np , len_units[wu]
-			wu += 1
+	n = 0
+	while np <= (len(len_units) - 1):
+		if (n + 1) == wu:
+			n += 1
+		if (n + 1) != wu:
+			print np , len_units[n]
 			np += 1
+			n += 1
 if wc == 2:
 	c = 0 
 	print categories[1]
 	while c < len(mass_units):
 		print (c + 1) , mass_units[c]
 		c += 1
+	wu = raw_input("->")
+	wu = int(wu)
+	np = 1
+	n = 0
+	while np <= (len(mass_units) - 1):
+		if (n + 1) == wu:
+			n += 1
+		if (n + 1) != wu:
+			print np , mass_units[n]
+			np += 1
+			n += 1
 if wc == 3: 
 	c = 0
 	print categories[2]
 	while c < len(vol_units):
 		print (c + 1) , vol_units[c]
 		c += 1
+	wu = raw_input("->")
+	wu = int(wu)
+	np = 1
+	n = 0
+	while np <= (len(vol_units) - 1):
+		if (n + 1) == wu:
+			n += 1
+		if (n + 1) != wu:
+			print np , vol_units[n]
+			np += 1
+			n += 1
 if wc == 4:
 	c = 0
 	print categories[3]
 	while c < len(tem_units):
 		print (c + 1) , tem_units[c]
 		c += 1
+	wu = raw_input("->")
+	wu = int(wu)
+	np = 1
+	n = 0
+	while np <= (len(tem_units) - 1):
+		if (n + 1) == wu:
+			n += 1
+		if (n + 1) != wu:
+			print np , tem_units[n]
+			np += 1
+			n += 1
 if wc == 5:
 	c = 0
 	print categories[4]
 	while c < len(currencies):
 		print (c + 1) , currencies[c]
 		c += 1
+	wu = raw_input("->")
+	wu = int(wu)
+	np = 1
+	n = 0
+	while np <= (len(currencies) - 1):
+		if (n + 1) == wu:
+			n += 1
+		if (n + 1) != wu:
+			print np , currencies[n]
+			np += 1
+			n += 1
 

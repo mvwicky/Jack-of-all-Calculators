@@ -44,9 +44,25 @@ units = ["meters" , "kilometers" , "feet" , "yards" , "miles" , "milligrams" ,
 
 len_factors = []
 
+waiting = ["W" , "a" , "i" , "t" , "i" , "n" , "g" , "." , "." , "."]
+
 start_time = time.time()
 log = open("log.txt" , "a")
 
+def alarm(t): # t in minutes
+	t = (float(t) * 60)
+	s = time.clock()
+	n = 0
+	while (s + t) > time.clock():
+		print waiting[n] ,
+		n += 1
+		time.sleep(3)
+		if n == 10:
+			n = 0
+			print " "
+	if (s + t) <= time.clock():
+		print " "
+		print "Done" 
 
 def conv_log(t , f , s , r):
 	log.write(str(s))
@@ -979,6 +995,7 @@ def do_things():
 		print "4. Formulas"
 		print "5. Unit Conversions"
 		print "6. Matrix Editing"
+		print "7. Alarm"
 		c = input()
 		os.system('cls')
 		stay_c = 1
@@ -1296,6 +1313,10 @@ def do_things():
 				print "Stay in Matrix Edit Mode?"
 				stay_e = input()
 				os.system('cls')
+		if c == 7:
+			print "Alarm"
+			when = raw_input("How many minutes? ->")
+			alarm(when)
 		print "Stay on?"
 		stay_d = input()
 		os.system('cls')
