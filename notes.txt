@@ -1,0 +1,5 @@
+number printed always goes from one to four
+if the iterating number is equal to the number that is the index
+of the chosen unit then skip it
+
+wu - 1 = index of 
