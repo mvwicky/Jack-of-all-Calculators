@@ -42,7 +42,56 @@ units = ["meters" , "kilometers" , "feet" , "yards" , "miles" , "milligrams" ,
 		 "farenheit" , "celsius" , "kelvin" , "rankine" , "delisle" , 
 		 "Newton" , "USD" , "EUR" , "GBP" , "CAD" , "JPY", "CNY"]
 
-len_factors = []
+categories = ["Length" , "Mass/Weight" , "Volume" , "Temperature" , "Currency"]
+
+len_units = ["Meters" , "Kilometers" , "Feet" , "Yards" , "Miles"]
+
+mass_units = ["Milligrams" ,  "Grams" , "Kilograms" , "Metric tons" , "Ounces" , 
+			  "Pounds" , "Tons" , "Troy Ounces"]
+
+vol_units = ["Teaspoon" , "Milliliter" , "Tablespoon" , "Liter" , "Ounce" , 
+	    	 "Cubic Meter" , "Pint" , "Quart" , "Gallon"]
+
+tem_units = ["Farenheit" , "Celsius" , "Kelvin" , "Rankine" , "Delisle" , "Newton"]
+
+currencies = ["USD" , "EUR" , "GBP" , "CAD" , "JPY", "CNY"]
+
+len_to = [ [.001 , 3.28084 , 1.09361 , .000621371] ,
+		   [ 1000 , 3280.84 , 1093.61 , .621371] , 
+		   [  .3048 , .0003048 , .3333333 , .000189394] ,
+		   [.9144 , .0009144 , 3 , .000568182] ,
+		   [1609.34 , 1.60934 , 5280 , 17] ]
+
+
+mass_to = [[ .001 , .00001 , .00000001 , .000035274 , .0000022046 , .0000000011023 , .000321507466 ] ,
+		   [1000 , .001 , .000001 , .035274 , .00220463 , .0000011023 , .0321507466 ] ,
+		   [100000 , 1000 , .001 , 35.274 , 2.20462 , .00110231 , 32.1507466 ] ,
+		   [1000000000 , 100000 , 1000 , 35274 , 2204.62 , 1.10231 , 32150.7466] ,
+		   [28349.5 , 28.3495 , .0283495 , .00002835 , .0625 , .00003125 , .911458333] ,
+		   [453492 , 453.592 , .453592 , .000453592 , 16 , .0005 , 14.5833333 ] ,
+		   [907200000 , 907185 , 907.185 , .907185 , 32000 , 2000 , 29166.6667 ] ,
+		   [31103.4768 , 31.1034768 , .0311034768 , .0000311034768 , 1.09714286 , .0685714286 , .0000342857143]
+			]
+
+vol_to = [[4.92892 , .3333333 , .00492892 , .1666667 , .0000049289 , .0104167 , .00520833 , .00130208] ,
+		  [.202884 , .067628 , .001 , .033814 , .000001 , .00211338 , .00105669 , .000264172] ,
+		  [3 , 14.7868 , .0147868 , .5 , .000014787 , .03125 , .015625 , .00390625] ,
+		  [202.884 , 4.92892 , 	.333333333 , .16666666 , .0000049289 , .0104167 , .00520833 , .00130208] ,
+		  [6 , 29.5735 , 2 , .0295735 , .000029574 , .0625 , .03125 , .0078125] ,
+		  [202884 , 1000000 , 67628 , 1000 , 33814 , 2113.38 , 1056.69 , 264.172] ,
+		  [96 , 473.176 , 32 , .473176 , 16 , .000473176 , .5 , .125] ,
+		  [192 ,  946.353 , 64 , .946353 , 32 , .000946353 , 2 , .25] ,
+		  [768 , 3785.41 , 256 , 3.78541 , 128 , .00378541 , 8 , 4] ,	
+		 ]
+
+temp_conv = [[.55555555 , (-1 * 32) , .55555555 , 459.67 , 1 , 459.67 , (-1 * .83333333) , 212 , .18333333 , (-1 * 32) ] ,
+			 [1.8 , 32 , 1 , 273.15 , 1.8 , 273.15 , (-1 * 1.5) , 100 , 1 , .33] ,
+			 [1.8 , (-1 * 459.67) , 1 , (-1 * 273.15) , 1.8 , 0 , (-1 * 1.5) , 373.15 , (-1 * .33) , 373.15] ,
+			 [1 , (-1 * 459.67) , (-1 * .5555555) , 491.67 , .5555555 , 0 , (-1 * .83333333) , 671.67 , .18333333 , (-1 * 491.67)] ,
+			 [(-1 * 1.2) , 212 , (-1 * .66666666) , 100 , (-1 * .6666666) , 373.15 , (-1 * 1.2) , 671.67 , (-1 * .22) , 33] ,
+			 [5.45454545 , 32 , 3.03030303 , 0 , 3.03030303 , 273.15 , 5.45454545 , 491.67 , (-1 * .22) , 33] 
+			]
+
 
 waiting = ["W" , "a" , "i" , "t" , "i" , "n" , "g" , "." , "." , "."]
 
@@ -312,679 +361,145 @@ def div_diag(a , d):
 	return quot
 	
 def unit_conversions():
-	print "1. Length"
-	print "2. Mass/Weight"
-	print "3. Volume"
-	print "4. Temperature"
-	print "5. Currency"
-	i = input()
-	if i == 1: # Length
-		print "Starting Unit"
-		print "1. Meter       3. Foot"
-		print "2. Kilometer   4. Yard"
-		print "               5. Mile"
-		q = input()
-		if q == 1: # meters to
-			print "Meters to"
-			print "1. Kilometer"
-			print "2. Foot"
-			print "3. Yard"
-			print "4. Mile"
-			h = input()
-			if h == 1: # kilometers
-				print "Meters = "
-				a = input()
-				r = float(a) * .001
-				print "In kilometers = " , r
-				os.system('pause')
-				conv_log(0 , 1 , a , r)
-			if h == 2: # feet
-				print "Meters = "
-				a = input()
-				r = float(a) * 3.28084
-				print "In feet = " , r
-				os.system('pause')
-				conv_log(0 , 2 , a , r)
-			if h == 3: # yards
-				print "Meters = "
-				a = input()
-				r = float(a) * 1.09361
-				print "In yards = " , r
-				os.system('pause')
-				conv_log(0 , 3 , a , r)
-			if h == 4: # miles
-				print "Meters = "
-				a = input()
-				r = float(a) * .000621371
-				print "In miles = " , r	
-				os.system('pause')
-				conv_log(0 , 4 , a , r)	
-		if q == 2: # kilometers to
-			print "Kilometers to"
-			print "1. Meter"
-			print "2. Foot"
-			print "3. Yard"
-			print "4. Mile"
-			h = input()
-			if h == 1: # meters
-				print "Kilometers = "
-				a = input()
-				r = float(a) * 1000
-				print "In meters = " , r
-				os.system('pause')
-				conv_log(1 , 0 , a , r)
-			if h == 2: # feet
-				print "Kilometers = "
-				a = input()
-				r = float(a) * 3280.84
-				print "In feet = " , r
-				os.system('pause')
-				conv_log(1 , 2 , a , r)
-			if h == 3: # yards
-				print "Kilometers = "
-				a = input()
-				r = float(a) * 1093.61
-				print "In yards = " , r
-				os.system('pause')
-				conv_log(1 , 3 , a , r)
-			if h == 4: # miles
-				print "Kilometers = "
-				a = input()
-				r = float(a) * .621371	
-				print "In miles = " , r
-				os.system('pause')
-				conv_log(1 , 4 , a , r)	
-		if q == 3: # feet to
-			print "Feet to"
-			print "1. Meter"
-			print "2. Kilometer"
-			print "3. Yard"
-			print "4. Mile"
-			h = input()
-			if h == 1: # meters
-				print "Feet = "
-				a = input()
-				r = float(a) * .3048
-				print "In meters = " , r
-				os.system('pause')
-				conv_log(2 , 0 , a , r)
-			if h == 2: # kilometers
-				print "Feet = "
-				a = input()
-				r = float(a) * .0003048
-				print "In kilometers = " , r
-				os.system('pause')
-				conv_log(2 , 1 , a , r)
-			if h == 3: # yards
-				print "Feet = "
-				a = input()
-				r = float(a) * .33333333
-				print "In yards = " , r
-				os.system('pause')
-				conv_log(2 , 3 , a , r)
-			if h == 4: # miles
-				print "Feet = "
-				a = input()
-				r = float(a) * .000189394
-				print "In miles = " , r
-				os.system('pause')
-				conv_log(2 , 4 , a , r)	
-		if q == 4: # yards to
-			print "Yards to"
-			print "1. Meter"
-			print "2. Kilometer"
-			print "3. Foot"
-			print "4. Mile"
-			h = input()
-			if h == 1: # meters
-				print "Yards = "
-				a = input()
-				r = float(a) * .9144
-				print "In meters = " , r
-				os.system('pause')
-				conv_log(3 , 0 , a , r)
-			if h == 2: # kilometers
-				print "Yards = "
-				a = input()
-				r = float(a) * .0009144
-				print "In kilometers = " , r
-				os.system('pause')
-				conv_log(3 , 1 , a , r)
-			if h == 3: # feet
-				print "Yards = "
-				a = input()
-				r = float(a) * 3
-				print "In feet = " , r
-				os.system('pause')
-				conv_log(3 , 2 , a , r)
-			if h == 4: # mile
-				print "Yards = "	
-				a = input()
-				r = float(a) * .000568182
-				print "In miles = " , r
-				os.system('pause')
-				conv_log(3 , 4 , a , r)	
-		if q == 5: # miles to
-			print "Miles to"
-			print "1. Meter"
-			print "2. Kilometer"
-			print "3. Foot"
-			print "4. Yard"
-			if h == 1: # meters
-				print "Miles = "
-				a = input()
-				r = float(a) * 1609.34
-				print "In meters = " , r
-				os.system('pause')
-				conv_log(4 , 0 , a , r)
-			if h == 2: # kilometers
-				print "Miles = "
-				a = input()
-				r = float(a) * 1.60934
-				print "In kilometers = " , r
-				os.system('pause')
-				conv_log(4 , 1 , a , r)
-			if h == 3: # feet
-				print "Miles = "
-				a = input()
-				r = float(a) * 5280
-				print "In feet = " , r
-				os.system('pause')
-				conv_log(4 , 2 , a , r)
-			if h == 4: # yards
-				print "Miles = "
-				a = input() 
-				r = float(a) * 1760
-				print "In yards = " , r
-				os.system('pause')	
-				conv_log(4 , 3 , a , r)
-			os.system('pause')
-	if i == 2: # Mass/Weight
-		print "Starting Unit"
-		print "1. Milligram   5. Ounce"
-		print "2. Gram        6. Pound"
-		print "3. Kilogram    7. Ton"
-		print "4. Metric Ton  8. Troy Ounce"
-		q = input()
-		if q == 1:
-			print "Milligrams to"
-			print "1. Grams"
-			print "2. Kilograms"
-			print "3. Metric Tons"
-			print "4. Ounces"
-			print "5. Pounds"
-			print "6. Tons"
-			print "7. Troy Ounces"
-			h = input()
-			if h == 1:
-				print "Milligrams = "
-				a = input()
-				r = float(a) * .001
-				print "In grams = " , r
-				os.system('pause')
-				conv_log(5 , 6 , a , r)
-			if h == 2:
-				print "Milligrams = "
-				a = input()
-				r = float(a) * .000001
-				print "In kilograms = " , r
-				os.system('pause')
-				conv_log(5 , 7 , a , r)
-			if h == 3:
-				print "Milligrams = "
-				a = input()
-				r = float(a) * .000000001
-				print "In metric tons = " , r
-				os.system('pause')
-				conv_log(5 , 8 , a , r)
-			if h == 4:
-				print "Milligrams = "
-				a = input()
-				r = float(a) * .000035274
-				print "In ounces = " , r
-				os.system('pause')
-				conv_log(5 , 9 , a , r)
-			if h == 5:
-				print "Milligrams = "
-				a = input()
-				r = float(a) * .0000022046
-				print "In pounds = " , r
-				os.system('pause')
-				conv_log(5 , 10 , a , r)
-			if h == 6:
-				print "Milligrams = "
-				a = input()
-				r = float(a) * .0000000011023
-				print "In tons = " , r
-				os.system('pause')
-				conv_log(5 , 11 , a , r)
-			if h == 7:
-				print "Milligrams = "
-				a = input()
-				r = float(a) * .0000321507466
-				print "In troy ounces = " , r
-				os.system('pause')
-				conv_log(5 , 11 , a , r)
-		if q == 2:
-			print "Grams to"
-			print "1. Milligrams"
-			print "2. Kilograms"
-			print "3. Metric Tons"
-			print "4. Ounces"
-			print "5. Pounds"
-			print "6. Tons"
-			print "7. Troy Ounces"
-			h = input()
-			if h == 1:
-				print "Grams = "
-				a = input()
-				r = float(a) * 1000
-				print "In milligrams = " , r
-				os.system('pause')
-				conv_log(6 , 5 , a , r)
-			if h == 2:
-				print "Grams = "
-				a = input()
-				r = float(a) * .001
-				print "In kilograms = " , r
-				os.system('pause')
-				conv_log(6 , 7 , a , r)
-			if h == 3:
-				print "Grams = "
-				a = input()
-				r = float(a) * .000001
-				print "In metric tons = " , r
-				os.system('pause')
-				conv_log(6 , 8 , a , r)
-			if h == 4:
-				print "Grams = "
-				a = input()
-				r = float(a) * .035274
-				print "In ounces = " , r
-				os.system('pause')
-				conv_log(6 , 9 , a , r)
-			if h == 5:
-				print "Grams = "
-				a = input()
-				r = float(a) * .00220462
-				print "In pounds = " , r
-				os.system('pause')
-				conv_log(6 , 10 , a , r)
-			if h == 6:
-				print "Grams = "
-				a = input()
-				r = float(a) * .0000011023
-				print "In tons = " ,  r
-				os.system('pause')
-				conv_log(6 , 11 , a , r)
-			if h == 7:
-				print "Grams = "
-				a = input()
-				r = float(a) * .0321507466
-				print "In troy ounces = " , r
-				os.system('pause')
-				conv_log(6 , 12 , a , r)
-		if q == 3:
-			print "Kilograms to"
-			print "1. Milligrams"
-			print "2. Grams"
-			print "3. Metric Tons"
-			print "4. Ounces"
-			print "5. Pounds"
-			print "6. Tons"
-			print "7. Troy Ounces"
-			h = input()
-			if h == 1:
-				print "Kilograms = "
-				a = input()
-				r = float(a) * 1000000
-				print "In milligrams = " , r
-				os.system('pause')
-			if h == 2:
-				print "Kilograms = "
-				a = input()
-				r = float(a) * 1000
-				print "In grams = " , r
-				os.system('pause')
-			if h == 3:
-				print "Kilograms = "
-				a = input()
-				r = float(a) * .001
-				print "In metric tons = " , r
-				os.system('pause')
-			if h == 4:
-				print "Kilograms = "
-				a = input()
-				r = float(a) * 35.274
-				print "In ounces = " , r
-				os.system('pause')
-			if h == 5:
-				print "Kilograms = "
-				a = input()
-				r = float(a) * 2.20462
-				print "In pounds = " , r
-				os.system('pause')
-			if h == 6:
-				print "Kilograms = "
-				a = input()
-				r = float(a) * .00110231
-				print "In tons = " , r
-				os.system('pause')
-			if h == 7:
-				print "Kilograms = "
-				a = input()
-				r = float(a) * 32.1507466
-				print "In troy ounces = " , r
-				os.system('pause')
-		if q == 4:
-			print "Metric Tons to"
-			print "1. Milligrams"
-			print "2. Grams"
-			print "3. Kilograms"
-			print "4. Ounces"
-			print "5. Pounds"
-			print "6. Tons"
-			print "7. Troy Ounces"
-			h = input()
-			if h == 1:
-				print "Metric Tons = "
-				a = input()
-				r = float(a) * 1000000000
-				print "In milligrams = " , r
-				os.system('pause')
-			if h == 2:
-				print "Metric Tons = "
-				a = input()
-				r = float(a) * 1000000
-				print "In grams = " , r
-				os.system('pause')
-			if h == 3:
-				print "Metric Tons = "
-				a = input()
-				r = float(a) * 1000
-				print "In Kilograms = " , r
-				os.system('pause') 
-			if h == 4:
-				print "Metric Tons = "
-				a = input()
-				r = float(a) * 35274
-				print "In ounces = " , r
-				os.system('pause')
-			if h == 5:
-				print "Metric Tons = "
-				a = input()
-				r = float(a) * 2204.62
-				print "In pounds = " , r
-				os.system('pause')
-			if h == 6:
-				print "Metric Tons = "
-				a = input()
-				r = float(a) * 1.10231
-				print "In tons = " , r
-				os.system('pause')
-			if h == 7:
-				print "Metric Tons = "
-				a = input()
-				r = float(a) * 32150.7466
-				print "In troy ounces = " , r
-				os.system('pause')
-		if q == 5:
-			print "Ounces to"
-			print "1. Milligrams"
-			print "2. Grams"
-			print "3. Kilograms"
-			print "4. Metric tons"
-			print "5. Pounds"
-			print "6. Tons"
-			print "7. Troy Ounces"
-			h = input()
-			if h == 1:
-				print "Ounces = "
-				a = input()
-				r = float(a) * 28349.5
-				print "In milligrams = " , r
-				os.system('pause')
-			if h == 2:
-				print "Ounces = "
-				a = input()
-				r = float(a) * 28.3495
-				print "In grams = " , r
-				os.system('pause')
-			if h == 3:
-				print "Ounces = "
-				a = input()
-				r = float(a) * .0283495
-				print "In kilograms = " , r
-				os.system('pause')
-			if h == 4:
-				print "Ounces = "
-				a = input()
-				r = float(a) * .00002835
-				print "In metric tons = " , r
-				os.system('pause')
-			if h == 5:
-				print "Ounces = "
-				a = input()
-				r = float(a) * .0625
-				print "In pounds = " , r
-				os.system('pause')
-			if h == 6:
-				print "Ounces = "
-				a = input()
-				r = float(a) * .00003125
-				print "In tons = " , r
-				os.system('pause')
-			if h == 7:
-				print "Ounces = "
-				a = input()
-				r = float(a) * .911458333
-				print "In troy ounces = " , r
-				os.system('pause')
-		if q == 6:
-			print "Pounds to"
-			print "1. Milligrams"
-			print "2. Grams"
-			print "3. Kilograms"
-			print "4. Metric tons"
-			print "5. Ounces"
-			print "6. Tons"
-			print "7. Troy Ounces"
-			h = input()
-			if h == 1:
-				print "Pounds = "
-				a = input()
-				r = float(a) * 453592
-				print "In milligrams = " , r
-				os.system('pause')
-			if h == 2:
-				print "Pounds = "
-				a = input()
-				r = float(a) * 453.592
-				print "In grams = " , r
-				os.system('pause')
-			if h == 3:
-				print "Pounds = "
-				a = input()
-				r = float(a) * .453592
-				print "In kilograms = " , r
-				os.system('pause')
-			if h == 4:
-				print "Pounds = "
-				a = input()
-				r = float(a) * .000453592
-				print "In metric tons = " , r
-				os.system('pause')
-			if h == 5:
-				print "Pounds = "
-				a = input()
-				r = float(a) * 16
-				print "In ounces = " , r
-				os.system('pause')
-			if h == 6:
-				print "Pounds = "
-				a = input()
-				r = float(a) * .0005
-				print "In tons = " , r
-				os.system('pause')
-			if h == 7:
-				print "Pounds = "
-				a = input()
-				r = float(a) * 14.5833333
-				print "In troy ounces = " , r
-				os.system('pause')
-		if q == 7:
-			print "Tons to"
-			print "1. Milligrams"
-			print "2. Grams"
-			print "3. Kilograms"
-			print "4. Metric tons"
-			print "5. Ounces"
-			print "6. Pounds"
-			print "7. Troy Ounces"
-			h = input()
-			if h == 1:
-				print "Tons = "
-				a = input()
-				r = float(a) * 907200000
-				print "In milligrams = " , r
-				os.system('pause')
-			if h == 2:
-				print "Tons = "
-				a = input()
-				r = float(a) * 907185
-				print "In grams = " , r
-				os.system('pause')
-			if h == 3:
-				print "Tons = "
-				a = input()
-				r = float(a) * 907.185
-				print "In kilograms = " , r
-				os.system('pause')
-			if h == 4:
-				print "Tons = "
-				a = input()
-				r = float(a) * .907185
-				print "In metric tons = " , r
-				os.system('pause')
-			if h == 5:
-				print "Tons = "
-				a = input()
-				r = float(a) * 32000
-				print "In ounces = " , r
-				os.system('pause')
-			if h == 6:
-				print "Tons = "
-				a = input()
-				r = float(a) * 2000
-				print "In pounds = " , r
-				os.system('pause')
-			if h == 7:
-				print "Tons = "
-				a = input()
-				r = float(a) * 29166.6667
-				print "In troy ounces = " , r
-				os.system('pause')
-		if q == 8:
-			print "Troy Ounces to"
-			print "1. Milligrams"
-			print "2. Grams"
-			print "3. Kilograms"
-			print "4. Metric tons"
-			print "5. Ounces"
-			print "6. Pounds"
-			print "7. Tons"
-			h = input()
-			if h == 1:
-				print "Troy Ounces = "
-				a = input()
-				r = float(a) * 31103.4768
-				print "In milligrams = " , r
-				os.system('pause')
-			if h == 2:
-				print "Troy Ounces = "
-				a = input()
-				r = float(a) * 31.1034768
-				print "In grams = " , r
-				os.system('pause')
-			if h == 3:
-				print "Troy Ounces = "
-				a = input()
-				r = float(a) * .0311034768
-				print "In kilograms = " , r
-				os.system('pause')
-			if h == 4:
-				print "Troy Ounces = "
-				a = input()
-				r = float(a) * .0000311034768
-				print "In metric tons = " , r
-				os.system('pause')
-			if h == 5:
-				print "Troy Ounces = "
-				a = input()
-				r = float(a) * 1.09714286
-				print "In ounces = " , r
-				os.system('pause')
-			if h == 6:
-				print "Troy Ounces = "
-				a = input()
-				r = float(a) * .0685714286
-				print "In pounds = " , r
-				os.system('pause')
-			if h == 7:
-				print "Troy Ounces = "
-				a = input()
-				r = float(a) * .0000342857143
-				print "In tons = " , r
-				os.system('pause')
-	if i == 3: # Volume
-		print "1. Teaspoon     7. Milliliter"
-		print "2. Tablespoon   8. Liter"
-		print "3. Ounce        9. Cubic Meter"
-		print "4. Pint"
-		print "5. Quart"
-		print "6. Gallon"
-		q = input()
-		if q == 1:
-			print "Teaspoons to"
-			print "1. Tablespoons"
-			print "2. Ounces"
-			print "3. Pints"
-			print "4. Quarts"
-			print "6. Gallons"
-			
-			h = input()
-		if q == 2:
-			h = input()
-		if q == 3:
-			h = input()
-		if q == 4:
-			h = input()
-		if q == 5:
-			h = input()
-		if q == 6:
-			h = input()
-		if q == 7:
-			h = input()
-		if q == 8:
-			h = input()
-		if q == 9:
-			h = input()	
-	if i == 4: # Temperature
-		print "1. Farenheit"
-		print "2. Celsius"
-		print "3. Kelvin"
-		print "4. Rankine"
-		print "5. Delisle"
-		print "6. Newton"
-		q = input()
-	if i == 5: # Currency
-		print "1. USD"
-		print "2. EUR"
-		print "3. GBP"
-		print "4. CAD"
-		print "5. JPY"
-		print "6. CNY"
-		q = input()
+	n = 0
+	print "Unit Conversions"
+	print "What set?"
+	while n < 5:
+		print (n + 1) , categories[n]
+		n += 1
+	wc = raw_input("->")
+	wc = int(wc)
+	os.system('cls')
+	print "Starting unit?"
+	if wc == 1:
+		c = 0
+		print categories[0]
+		while c < len(len_units):
+			print (c + 1) , len_units[c]
+			c += 1
+		wu = raw_input("->")
+		wu = int(wu)
+		np = 1
+		n = 0
+		while np <= (len(len_units) - 1):
+			if (n + 1) == wu:
+				n += 1
+			if (n + 1) != wu:
+				print np , len_units[n]
+				np += 1
+				n += 1
+		to = raw_input("->")
+		to = int(to)
+		print " "
+		starting = raw_input("Amount ->")
+		result = 0
+		result = float(result)
+		result = (float(starting)) * float(len_to[wu - 1][to - 1])
+		print result
+		os.system('pause')
+		os.system('cls')
+	if wc == 2:
+		c = 0 
+		print categories[1]
+		while c < len(mass_units):
+			print (c + 1) , mass_units[c]
+			c += 1
+		wu = raw_input("->")
+		wu = int(wu)
+		np = 1
+		n = 0
+		while np <= (len(mass_units) - 1):
+			if (n + 1) == wu:
+				n += 1
+			if (n + 1) != wu:
+				print np , mass_units[n]
+				np += 1
+				n += 1
+		to = raw_input("->")
+		to = int(to)
+		print " "
+		starting = raw_input("Amount ->")
+		result = 0
+		result = float(result)
+		result = (float(starting)) * float(mass_to[wu - 1][to - 1])
+		print result
+		os.system('pause')
+		os.system('cls')
+	if wc == 3: 
+		c = 0
+		print categories[2]
+		while c < len(vol_units):
+			print (c + 1) , vol_units[c]
+			c += 1
+		wu = raw_input("->")
+		wu = int(wu)
+		np = 1
+		n = 0
+		while np <= (len(vol_units) - 1):
+			if (n + 1) == wu:
+				n += 1
+			if (n + 1) != wu:
+				print np , vol_units[n]
+				np += 1
+				n += 1
+		to = raw_input("->")
+		to = int(to)
+		print " "
+		starting = raw_input("Amount ->")
+		result = 0
+		result = float(result)
+		result = (float(starting)) * float(vol_to[wu - 1][to - 1])
+		print result
+		os.system('pause')
+		os.system('cls')
+	if wc == 4:
+		c = 0
+		print categories[3]
+		while c < len(tem_units):
+			print (c + 1) , tem_units[c]
+			c += 1
+		wu = raw_input("->")
+		wu = int(wu)
+		np = 1
+		n = 0
+		while np <= (len(tem_units) - 1):
+			if (n + 1) == wu:
+				n += 1
+			if (n + 1) != wu:
+				print np , tem_units[n]
+				np += 1
+				n += 1
+		to = raw_input("->")
+		to = int(to)
+		print " "
+		ta = (2 * (to - 1))
+		print ta
+		starting = raw_input("Amount ->")
+		result = 0
+		result = float(result)
+		starting = float(starting)
+		result = starting * temp_conv[wu -1][ta] + temp_conv[wu - 1][ta + 1]
+		print result
+		os.system('pause')
+		os.system('cls')
+	if wc == 5:
+		c = 0
+		print categories[4]
+		while c < len(currencies):
+			print (c + 1) , currencies[c]
+			c += 1
+		wu = raw_input("->")
+		wu = int(wu)
+		np = 1
+		n = 0
+		while np <= (len(currencies) - 1):
+			if (n + 1) == wu:
+				n += 1
+			if (n + 1) != wu:
+				print np , currencies[n]
+				np += 1
+				n += 1
+
 
 def do_things():
 	stay_d = 1
@@ -1140,7 +655,7 @@ def do_things():
 		if c == 4: # Formulas
 			while stay_f == 1:
 				n = 1
-				num_ops = 18
+				num_ops = 17
 				while n <= num_ops:
 					print n, ops[n-1]
 					n += 1  
@@ -1260,9 +775,6 @@ def do_things():
 					r = input()
 					print op_outs[9] , segment_area(t , r)
 					os.system('pause')
-				if f == 18:
-					print ""
-					unit_conversions()
 				os.system('cls')
 				print "Stay in Formulas?"
 				stay_f = input()
