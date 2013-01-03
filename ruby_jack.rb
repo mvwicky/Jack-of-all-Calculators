@@ -21,7 +21,9 @@ while stay_d == 1
 	if c == 1
 		n = 0
 		while n < 17
-			puts (n + 1)  ops[n] 
+			print (n + 1), ". " , ops[n] 
+			n += 1
+			puts " "
 		end
 	end
 	stay_d = gets.to_f 
