@@ -8,6 +8,7 @@ Pi = 3.141592
 DEG_TO_RAD = (Pi / 180)
 a = [1 , 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9]
 c = [1 , 2 , 4 , 4 , 5 , 6 , 7 , 8 , 9]
+
 ops = ["Addition" , "Subtraction" , "Multiplication" , 
 	   "Division" , "Exponentation" , 
 	   "Area of a Triangle" , "Perimeter of a Triangle" , 
@@ -828,6 +829,7 @@ def do_things():
 		if c == 7:
 			print "Alarm"
 			when = raw_input("How many minutes? ->")
+			when = float(when)
 			alarm(when)
 		print "Stay on?"
 		stay_d = input()
