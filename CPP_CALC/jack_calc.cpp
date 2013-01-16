@@ -1,12 +1,17 @@
 #include <iostream>
 #include <string.h>
+#include <math.h>
 #include "OPERATION.h"
 #include "ADDITION.h"
 #include "SUBTRACTION.h"
 #include "MULTIPLICATION.h"
 #include "DIVISION.h"
+#include "CIRCLE.h"
+#include "RECT.h"
+#include "EXPONENTATION.h"
 
-#define PI 3.131592
+#define PI 3.14159265359
+#define DEG_TO_RAD (PI / 180)
 
 
 //string ops[] = {" + " , " - " , " * " , " / "};
@@ -16,11 +21,14 @@ using namespace std;
 
 int make_menu();
 float do_op(int w);
+int rect_menu();
+void do_rect(int wr);
+int circ_menu();
+void do_circ(int wc);
 
 int main()
 {
 	do_op(make_menu());
-	
 }
 
 int make_menu()
@@ -30,6 +38,8 @@ int make_menu()
 	cout << "2. Subtraction" << endl;
 	cout << "3. Multiplication" << endl;
 	cout << "4. Division" << endl;
+	cout << "5. Exponentation" << endl;
+	cout << "6. Rectangles" << endl;
 	cin>>wop;
 	return wop;
 }
@@ -48,7 +58,7 @@ float do_op(int w)
 			cin >> opin2;
 			addition add (opin1 , opin2);
 			cout << opin1 << " + " << opin2 << " = " << add.adding() << endl;
-			add.~addition();
+			//add.~addition();
 			break;
 		}
 		case 2:
@@ -58,8 +68,8 @@ float do_op(int w)
 			cout << "Input 2 = " << endl;
 			cin >> opin2;
 			subtraction sub (opin1 , opin2);
-			cout << opin1 << " - " << opin2 << " = " << sub.subbing() << endl;
-			sub.~subtraction();
+		 	cout << opin1 << " - " << opin2 << " = " << sub.subbing() << endl;
+			//sub.~subtraction();
 			break;
 		}
 		case 3:
@@ -70,7 +80,7 @@ float do_op(int w)
 			cin >> opin2;
 			multiplication mult (opin1 , opin2);
 			cout << opin1 << " * " << opin2 << " = " << mult.multing() << endl;
-			mult.~multiplication();
+			//mult.~multiplication();
 			break;
 		}
 		case 4:
@@ -81,10 +91,108 @@ float do_op(int w)
 			cin >> opin2;
 			division divs (opin1 , opin2);
 			cout << opin1 << " / " << opin2 << " = " << divs.divving() << endl;
-			divs.~division();
+			//divs.~division();
 			break;
 		}
-
+		case 5:
+		{
+			cout << "Base = " << endl;
+			cin >> opin1;
+			cout << "Power = " << endl;
+			cin >> opin2;
+			exponentation exps (opin1 , opin2);
+			cout << opin1 << " ^ " << opin2 << " = " << exps.expping() << endl;
+			//divs.~division();
+			break;
+		}
+		case 6:
+		{
+			do_rect(rect_menu());
+		}
 	}
 	return 0;
 }
+ 
+int rect_menu()
+{	
+	int wrect;
+	cout << "1. Perimeter of a Square" << endl;
+	cout << "2. Perimeter of a Rectangle" << endl;
+	cout << "3. Area of a Square" << endl;
+	cout << "4. Area of a Rectangle" << endl;
+	cin >> wrect;
+	return wrect;
+}
+
+void do_rect(int wr)
+{
+	float side1;
+	float side2;
+	switch (wr)
+	{
+		case 1:
+		{	
+			cout << "Side Length:" << endl;
+			cin >> side1;			
+			square sqp(side1);
+			cout << "4 " << " * " << sqp.showi1() << " = " << sqp.perim_s() << endl;	
+			break;
+		}
+		case 2:
+		{
+			cout << "Side 1 Length" << endl;
+			cin >> side1;
+			cout << "Side 2 Length" << endl;
+			cin >> side2;
+			rect rep(side1 , side2);
+			cout << "2 * " << rep.showi1() << " + " << "2 * " << rep.showi2() << " = " << rep.perim_r() << endl;
+			break;
+		}	
+		case 3:
+		{
+			cout << "Side Length" << endl;
+			cin >> side1;
+			square sqa(side1);
+			cout << sqa.showi1() << " * " << sqa.showi1() << " = " << sqa.area_s() << endl;
+			break;
+		}
+		case 4:
+		{
+			cout << "Side 1 Length" << endl;
+			cin >> side1;
+			cout << "Side 2 Length" << endl;
+			cin >> side2;
+			rect rea(side1 , side2);
+			cout << rea.showi1() << " * " << rea.showi2() << " = " << rea.area_r() << endl;
+			break;
+		}
+	}
+}
+
+
+int circ_menu()
+{	
+	int wcirc;
+	cout << "1. Circumference of a Circle" << endl;
+	cout << "2. Area of a Circle" << endl;
+	cout << "3. Arc Length" << endl;
+	cout << "4. Segment Area" << endl;
+	cin >> wcirc;
+	return wcirc;
+}
+/*
+void do_circ(int wc)
+{
+	float one;
+	float two;
+	switch (wc)
+	{
+		case 1:
+		{
+			cout << "Radius:" << endl;
+			cin >> one;
+			circle ccirc(one);
+		}
+	}
+}
+*/

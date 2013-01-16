@@ -43,6 +43,4 @@ operation::operation(float i1 , float i2 , float i3)
 	*input3 = i3;
 }
 
-
-
 #endif // OPERATION_H_INCLUDED
