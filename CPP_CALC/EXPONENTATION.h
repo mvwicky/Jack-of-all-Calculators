@@ -32,11 +32,11 @@ float exponentation::expping(void)
 	return result;
 }
 
-float operation::showi1(void)
+float exponentation::showi1(void)
 {
 	return *input1;
 }
-float operation::showi2(void)
+float exponentation::showi2(void)
 {
 	return *input2;
 }

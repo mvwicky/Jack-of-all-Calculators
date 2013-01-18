@@ -9,6 +9,7 @@
 #include "CIRCLE.h"
 #include "RECT.h"
 #include "EXPONENTATION.h"
+#include "TRI.h"
 
 #define PI 3.14159265359
 #define DEG_TO_RAD (PI / 180)
@@ -25,6 +26,8 @@ int rect_menu();
 void do_rect(int wr);
 int circ_menu();
 void do_circ(int wc);
+int tri_menu();
+void do_tri(int wt);
 
 int main()
 {
@@ -40,6 +43,8 @@ int make_menu()
 	cout << "4. Division" << endl;
 	cout << "5. Exponentation" << endl;
 	cout << "6. Rectangles" << endl;
+	cout << "7. Circles" << endl;
+	cout << "8. Triangles" << endl;
 	cin>>wop;
 	return wop;
 }
@@ -108,6 +113,17 @@ float do_op(int w)
 		case 6:
 		{
 			do_rect(rect_menu());
+			break;
+		}
+		case 7:
+		{
+			do_circ(circ_menu());
+			break;
+		}
+		case 8: 
+		{
+			do_tri(tri_menu());
+			break;
 		}
 	}
 	return 0;
@@ -169,7 +185,6 @@ void do_rect(int wr)
 	}
 }
 
-
 int circ_menu()
 {	
 	int wcirc;
@@ -180,19 +195,95 @@ int circ_menu()
 	cin >> wcirc;
 	return wcirc;
 }
-/*
+
 void do_circ(int wc)
 {
 	float one;
 	float two;
 	switch (wc)
 	{
-		case 1:
+		case 1: // circumference
 		{
 			cout << "Radius:" << endl;
 			cin >> one;
 			circle ccirc(one);
+			cout << "(2 * " << ccirc.showi1() << ") * " << PI << " = " << ccirc.circum() << endl;
+			break;
+		}
+		case 2: // Area
+		{
+			cout  << "Radius:" << endl;
+			cin >> one;
+			circle acirc(one);
+			cout << PI << " * (" << acirc.showi1() << "^2)" <<  " = " << acirc.area_c() << endl;
+			break;
+		}
+		case 3: // Arc Length
+		{
+
+			cout << "Angle in Degrees:" << endl;
+			cin >> two;
+			cout << "Radius:" << endl;
+			cin >> one;
+			circle arccirc(one , two);
+			cout << arccirc.showi1() << " * (" << (arccirc.showi2() * DEG_TO_RAD) << ") = " << arccirc.arc_length() << endl;
+			break;
+		}
+		case 4: // Segment Area
+		{
+			cout << "Angle in Degress:" << endl;
+			cin >> one;
+			cout << "Radius:" << endl;
+			cin >> two;
+			circle segcirc(one , two);
+			cout << segcirc.seg_area() << endl;
+			break;
 		}
 	}
 }
-*/
+
+int tri_menu()
+{	
+	int wtri;
+	cout << "1. Perimeter of a Triangle" << endl;
+	cout << "2. Area of a Triangle" << endl;
+	cin >> wtri;
+	return wtri;
+}
+
+void do_tri(int wt)
+{
+	float s1; // base
+	float s2; // height
+	float s3;
+	switch (wt)
+	{
+		case 1:
+		{
+			cout << "Side 1:" << endl;
+			cin >> s1;
+			cout << "Side 2:" << endl;
+			cin >> s2; 
+			cout << "Side 3:" << endl;
+			cin >> s3;
+			tri ptri(s1 , s2 , s3);
+			if (ptri.perim_t() == -1)
+			{
+				cout << "Not a Valid Triangle" << endl;
+			}
+			else
+				cout << ptri.showi1() << " + " << ptri.showi2() << " + " << ptri.showi3() << " = " << ptri.perim_t() << endl;
+			break;
+		}
+		case 2:
+		{
+			cout << "Base:" << endl;
+			cin >> s1;
+			cout << "Height:" << endl;
+			cin >> s2;
+			tri atri(s1 , s2);
+			cout << "(" << atri.showi1() << " * " << atri.showi2() << ") / 2 = " << atri.area_t() << endl; 
+			break;
+		}
+	}
+}
