@@ -4,6 +4,9 @@ TODO-Make a function that takes in inputs to a table.
 	-Make a function that reads those inputs back into a operator function
 	]]--
 --base function definitions
+
+
+
 function addition(...)
 	local ag = select("#",...) -- number of args
 	local n = 1
@@ -78,7 +81,6 @@ function do_stuff(dop)
 		subtraction(unpack(get_args()))
 	end
 	if dop == 3 then
-	io.write("Input 1 = ")
 		multiplication(unpack(get_args()))
 	end
 	if dop == 4 then
@@ -105,7 +107,7 @@ function get_args()
 		io.write(n)
 		io.write(": ")
 		
-		ag = assert(io.read("*number"), "invalid input")
+		ag = io.read()
 		if ag == "done" or ag == " " or ag == "" then
 			break
 		end
@@ -116,4 +118,5 @@ function get_args()
 	return ags
 end
 
+print_nl("1")
 do_stuff(tonumber(pick_one()))
