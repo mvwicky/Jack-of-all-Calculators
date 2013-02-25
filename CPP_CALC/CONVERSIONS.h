@@ -7,8 +7,7 @@ protected:
 	float *len;
 	float *mass;
 public:
-	static float len_u[4][4]; 
-	static float mass_u[7][8]; 
+	static float len_u[4][4];  
 
 	conversion(int , int , float , float);
 	~conversion();
